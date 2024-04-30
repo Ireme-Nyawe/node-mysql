@@ -9,9 +9,8 @@ app.get('/notes',async (req,res)=>{
 })
 
 app.get('/notes/:id',async (req,res)=>{
-    const {id}= req.params
-    const note = await getNote(id);
-    res.send(note);
+    const notes = await getNotes();
+    res.send(notes);
 })
 app.delete('/deletenote/:id', async (req,res)=>{
     const id= req.params.id
