@@ -1,7 +1,9 @@
 import express from "express";
+import cors from "cors";
 import { getNotes,getNote,deleteNote, createNote, updateNote } from "./database.js";
 const app = express();
 app.use(express.json())
+app.use(cors());
 
 app.get('/notes',async (req,res)=>{
     const notes = await getNotes();
@@ -28,7 +30,7 @@ app.put('/notes/:id',async (req,res)=>{
     const note = await updateNote(id, title, content)
     res.status(201).send(note);
 })
-
-app.listen(5000,()=>{
-    console.log("server is running on 5000");
+const port=process.env.PORT;
+app.listen(port,()=>{
+    console.log(`server is running on ${port}`);
 });
